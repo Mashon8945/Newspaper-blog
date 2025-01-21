@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-og2@yuc77b!bt#p$5o^(*rf4cm-a4-@ol_qr-7-ck7tfj5on6w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [*]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,6 +39,24 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+import dj_database_url
+
+
+# Database
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL')
+    )
+}
+
+# Static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Ensure Whitenoise is used for serving static files
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
 
 ROOT_URLCONF = 'blog_project.urls'
 
@@ -67,6 +85,7 @@ LOGOUT_REDIRECT_URL = 'home'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
