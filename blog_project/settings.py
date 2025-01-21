@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +62,8 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 
 STATICFILES_DIR = [os.path.join(BASE_DIR, 'static')]
 
-
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
